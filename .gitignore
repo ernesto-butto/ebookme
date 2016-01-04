@@ -1,0 +1,12 @@
+target
+bower_components
+node_modules
+*.iml
+*.ipr
+*.iws
+*.ids
+#.*
+.#*
+*.*~
+catwizard.log
+.idea/**/*
