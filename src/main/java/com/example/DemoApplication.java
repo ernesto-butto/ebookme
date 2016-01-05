@@ -13,7 +13,7 @@ public class DemoApplication {
     @RequestMapping("/")
     @ResponseBody
     String home() {
-      return "Hello Cindy from Heroku! with github integration :>";
+      return "Hello Cindy And Ernesto from Heroku! with github integration :>";
     }
 
     public static void main(String[] args) {
