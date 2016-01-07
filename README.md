@@ -5,8 +5,6 @@
 
 https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku
 
-poolebu@gmail.com
-jodete11
 
 Para crearlo con heroku
 
