@@ -1,4 +1,4 @@
-package com.example;
+package com.catwizard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @SpringBootApplication
 @Controller
-public class DemoApplication {
+public class MainApplication {
 
     @RequestMapping("/")
     @ResponseBody
@@ -17,6 +17,6 @@ public class DemoApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(MainApplication.class, args);
     }
 }

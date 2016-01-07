@@ -1,4 +1,4 @@
-package com.example;
+package com.catwizard;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,9 +7,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = DemoApplication.class)
+@SpringApplicationConfiguration(classes = MainApplication.class)
 @WebAppConfiguration
-public class DemoApplicationTests {
+public class MainApplicationTests {
 
 	@Test
 	public void contextLoads() {
