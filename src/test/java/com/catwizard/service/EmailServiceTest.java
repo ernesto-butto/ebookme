@@ -2,6 +2,7 @@ package com.catwizard.service;
 
 import com.catwizard.MainApplication;
 import org.apache.commons.mail.EmailException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -19,6 +20,7 @@ import java.io.File;
 public class EmailServiceTest {
 
     @Test
+    @Ignore
     public void sendEmailTest(){
 
         EmailService emailService = new EmailService();
@@ -30,6 +32,28 @@ public class EmailServiceTest {
 
         try {
             emailService.sendMail(subject,content,file,toEmail);
+        } catch (EmailException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @Test
+    public void sendEmailWithHtmlAttachment(){
+
+        HtmlService htmlService = new HtmlService();
+        EmailService emailService = new EmailService();
+
+        String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html";
+
+        String htmlContent = htmlService.getHtmlContent(urlToConvert);
+
+        File file = htmlService.saveHtmlContentToFile(htmlContent,"ebookContent");
+
+
+        try {
+            emailService.sendMail("htmlContent test","Trying stuff with this content",file,"poolebu@gmail.com");
         } catch (EmailException e) {
             e.printStackTrace();
         }
