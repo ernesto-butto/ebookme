@@ -21,20 +21,11 @@ import java.util.Properties;
  */
 public class EmailService {
 
-	private JavaMailSender mailSender;
-	private SimpleMailMessage simpleMailMessage;
 
-	final String username = "ebookme2@gmail.com";
-	final String password = "SyVav5UB";
+	final String username = "xxx";
+	final String password = "xxx";
 
 
-	public void setSimpleMailMessage(SimpleMailMessage simpleMailMessage) {
-		this.simpleMailMessage = simpleMailMessage;
-	}
-
-	public void setMailSender(JavaMailSender mailSender) {
-		this.mailSender = mailSender;
-	}
 
 	public void sendMail(String subject, String content,File fileAttachment,String recepient) throws EmailException {
 
@@ -44,11 +35,9 @@ public class EmailService {
 
 		attachment.setPath(fileAttachment.getPath());
 		attachment.setDisposition(EmailAttachment.ATTACHMENT);
-//		attachment.setDescription("Ebook for "+recepient);
-//		attachment.setName(recepient);
 
 
-		//
+		// Populate message
 		MultiPartEmail email = new MultiPartEmail();
 		email.setHostName("smtp.googlemail.com");
 		email.setSmtpPort(465);
@@ -59,11 +48,11 @@ public class EmailService {
 		email.setMsg(content);
 		email.addTo(recepient);
 
+		// Attach
 		email.attach(attachment);
 
-
+		// Send
 		email.send();
-		//
 
 
 	}
