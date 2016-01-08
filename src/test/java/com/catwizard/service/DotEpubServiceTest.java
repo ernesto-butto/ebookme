@@ -1,7 +1,7 @@
 package com.catwizard.service;
 
 import com.catwizard.MainApplication;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ import java.io.File;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MainApplication.class)
 @WebAppConfiguration
-public class DotEpubRequestTest {
+public class DotEpubServiceTest {
 
     String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html";
     String outputFormat = "MOBI";
@@ -27,11 +27,11 @@ public class DotEpubRequestTest {
     @Ignore
     public void sendRequestTest(){
 
-        DotEpubRequest dotEpubRequest = new DotEpubRequest();
+        DotEpubService dotEpubService = new DotEpubService();
 
         File result = null;
         try {
-            result = dotEpubRequest.sendRequestForConversionDotEpub("<b>hola</b>", urlToConvert, outputFormat);
+            result = dotEpubService.sendRequestForConversionDotEpub("<b>hola</b>", urlToConvert, outputFormat);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,9 +47,9 @@ public class DotEpubRequestTest {
 
         String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html";
 
-        DotEpubRequest dotEpubRequest = new DotEpubRequest();
+        DotEpubService dotEpubService = new DotEpubService();
 
-        String htmlToConvert = dotEpubRequest.getHtmlContent(urlToConvert);
+        String htmlToConvert = dotEpubService.getHtmlContent(urlToConvert);
 
         Assert.assertTrue(!htmlToConvert.isEmpty());
     }
@@ -59,9 +59,9 @@ public class DotEpubRequestTest {
 
         String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html";
 
-        DotEpubRequest dotEpubRequest = new DotEpubRequest();
+        DotEpubService dotEpubService = new DotEpubService();
 
-        String htmlToConvert = dotEpubRequest.getHtmlContent(urlToConvert);
+        String htmlToConvert = dotEpubService.getHtmlContent(urlToConvert);
 
 
     }
@@ -71,13 +71,13 @@ public class DotEpubRequestTest {
     public void getHtmlContentAndConvertWitDotEpubTest(){
 
 
-        DotEpubRequest dotEpubRequest = new DotEpubRequest();
+        DotEpubService dotEpubService = new DotEpubService();
 
-        String htmlToConvert = dotEpubRequest.getHtmlContent(urlToConvert);
+        String htmlToConvert = dotEpubService.getHtmlContent(urlToConvert);
 
         File result = null;
         try {
-            result = dotEpubRequest.sendRequestForConversionDotEpub(htmlToConvert, urlToConvert, outputFormat);
+            result = dotEpubService.sendRequestForConversionDotEpub(htmlToConvert, urlToConvert, outputFormat);
         } catch (Exception e) {
             e.printStackTrace();
         }

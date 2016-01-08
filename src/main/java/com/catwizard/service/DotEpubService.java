@@ -9,10 +9,8 @@ import java.util.Scanner;
 /**
  * Created by poolebu on 1/7/16.
  */
-public class DotEpubRequest {
+public class DotEpubService {
 
-    final String username = "ebookme2@gmail.com";
-    final String password = "SyVav5UB";
 
 
     public String getHtmlContent(String targetUrl){

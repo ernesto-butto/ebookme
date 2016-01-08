@@ -16,7 +16,7 @@ import java.io.File;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MainApplication.class)
 @WebAppConfiguration
-public class EbookGlueTest {
+public class EbookGlueServiceTest {
 
     String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html";
     String outputFormat = "MOBI";
@@ -24,10 +24,10 @@ public class EbookGlueTest {
     @Test
     public void sendGetTest(){
 
-        EbookGlue ebookGlue = new EbookGlue();
+        EbookGlueService ebookGlueService = new EbookGlueService();
         File file=null;
         try {
-           file=  ebookGlue.sendGet(urlToConvert,outputFormat);
+           file=  ebookGlueService.sendGet(urlToConvert,outputFormat);
         } catch (Exception e) {
             e.printStackTrace();
         }

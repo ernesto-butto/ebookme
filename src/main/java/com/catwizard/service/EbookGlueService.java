@@ -7,7 +7,7 @@ import java.net.URL;
 /**
  * Created by poolebu on 1/8/16.
  */
-public class EbookGlue {
+public class EbookGlueService {
 
     String apiKey = "cfe5hqnhfcq3bez7lgpn24g4qux5ilz4";
     String ebookUrlService = "https://ebookglue.com/convert";
