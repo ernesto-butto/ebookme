@@ -15,7 +15,7 @@ public class ConverterController {
     private final Logger log = LoggerFactory.getLogger(ConverterController.class);
 
     @RequestMapping(value = "/convert",
-            method = RequestMethod.GET,
+            method = RequestMethod.POST,
             produces = "application/json")
     @ResponseBody
         public RestResponse convert(ConvertRequest convertRequest) {
