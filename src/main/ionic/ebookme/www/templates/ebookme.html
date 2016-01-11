@@ -1,25 +1,19 @@
 <ion-view title="ebookme">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-
-
         <form class="list">
             <label class="item item-input">
                 <span class="input-label">URL</span>
-                <input type="text" placeholder="link to convert" ng-model="urlToConvert.url">
+                <input type="text" placeholder="link to convert">
             </label>
             <label class="item item-input">
                 <span class="input-label">Email</span>
-                <input type="email" placeholder="email to send ebook" ng-model="urlToConvert.email">
+                <input type="email" placeholder="email to send ebook">
             </label>
             <label class="item item-select">
                 <span class="input-label">Format</span>
-                <select ng-model="urlToConvert.format">
-                  <option>MOBI</option>
-                  <option>EPUB</option>
-                  <option selected value="HTML" >HTML</option>
-                </select>
+                <select></select>
             </label>
-            <button class="button button-positive button-block button-large" ng-click="sendUrlToConvert()">Send</button>
+            <button class="button button-positive button-block button-large">Send</button>
         </form>
     </ion-content>
 </ion-view>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by poolebu on 1/7/16.
  */
 @RestController
+@CrossOrigin
 public class ConverterController {
 
     private final Logger log = LoggerFactory.getLogger(ConverterController.class);
