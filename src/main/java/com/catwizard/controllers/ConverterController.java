@@ -18,7 +18,7 @@ public class ConverterController {
             method = RequestMethod.POST,
             produces = "application/json")
     @ResponseBody
-        public RestResponse convert(ConvertRequest convertRequest) {
+        public RestResponse convert(@RequestBody ConvertRequest convertRequest) {
 
         log.info("Got convert request with "+convertRequest.toString());
         RestResponse restResponse = new RestResponse("Got request "+ convertRequest.toString());
