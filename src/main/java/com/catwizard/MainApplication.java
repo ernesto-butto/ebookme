@@ -13,10 +13,11 @@ public class MainApplication {
     @RequestMapping("/")
     @ResponseBody
     String home() {
-      return "Hello Cindy And Ernesto from Heroku! with github integration :>";
+        return "Ebook me is Running :)";
     }
 
     public static void main(String[] args) {
+
         SpringApplication.run(MainApplication.class, args);
     }
 }

@@ -5,6 +5,7 @@ import org.apache.commons.mail.EmailException;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -19,11 +20,14 @@ import java.io.File;
 @WebAppConfiguration
 public class EmailServiceTest {
 
+    @Autowired
+    EmailService emailService;
+
+
     @Test
     @Ignore
     public void sendEmailTest(){
 
-        EmailService emailService = new EmailService();
         String toEmail="poolebu@gmail.com";
         String content="Hello Ernesto, this is a good email, please dont reject me, hope you like it";
         String subject = "Hello Ernesto ";
@@ -43,7 +47,6 @@ public class EmailServiceTest {
     public void sendEmailWithHtmlAttachment(){
 
         HtmlService htmlService = new HtmlService();
-        EmailService emailService = new EmailService();
 
         String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html";
 
