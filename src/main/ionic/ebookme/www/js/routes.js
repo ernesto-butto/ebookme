@@ -7,19 +7,19 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-      
+
+
     .state('tabsController', {
-      url: '/page1',
+      url: '/init',
       abstract:true,
       templateUrl: 'templates/tabsController.html'
     })
-      
-    
-      
-        
+
+
+
+
     .state('tabsController.ebookme', {
-      url: '/page5',
+      url: '/convert',
       views: {
         'tab3': {
           templateUrl: 'templates/ebookme.html',
@@ -27,11 +27,11 @@ angular.module('app.routes', [])
         }
       }
     })
-        
-      
+
+
     ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/page1/page5');
+  $urlRouterProvider.otherwise('/init/convert');
 
 });
