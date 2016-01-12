@@ -5,5 +5,3 @@ target
 node_modules/
 platforms/
 plugins/
-
-src/main/ionic/ebookme/ionic.project
