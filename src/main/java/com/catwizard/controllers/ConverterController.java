@@ -16,6 +16,7 @@ import java.io.File;
 /**
  * Created by poolebu on 1/7/16.
  */
+@CrossOrigin
 @RestController
 public class ConverterController {
 
