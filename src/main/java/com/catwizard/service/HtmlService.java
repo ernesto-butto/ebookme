@@ -1,5 +1,7 @@
 package com.catwizard.service;
 
+import org.springframework.stereotype.Service;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -9,6 +11,7 @@ import java.util.Scanner;
 /**
  * Created by poolebu on 1/7/16.
  */
+@Service
 public class HtmlService {
 
 

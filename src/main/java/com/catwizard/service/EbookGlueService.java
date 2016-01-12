@@ -1,5 +1,7 @@
 package com.catwizard.service;
 
+import org.springframework.stereotype.Service;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -7,6 +9,7 @@ import java.net.URL;
 /**
  * Created by poolebu on 1/8/16.
  */
+@Service
 public class EbookGlueService {
 
     String apiKey = "cfe5hqnhfcq3bez7lgpn24g4qux5ilz4";
