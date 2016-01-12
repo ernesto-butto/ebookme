@@ -63,7 +63,7 @@ public class ConverterController {
 
     private void htmlConvertAndSendEmail(@RequestBody ConvertRequest convertRequest, RestResponse restResponse) {
 
-        String htmlContent = htmlService.getHtmlContent(convertRequest.getFormat());
+        String htmlContent = htmlService.getHtmlContent(convertRequest.getUrl());
 
         File file = htmlService.saveHtmlContentToFile(htmlContent, "ebookContent");
 
