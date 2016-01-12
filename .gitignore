@@ -5,3 +5,5 @@ target
 node_modules/
 platforms/
 plugins/
+src/main/ionic/ebookme/www/css/ionic.app.css
+src/main/ionic/ebookme/www/css/ionic.app.min.css
