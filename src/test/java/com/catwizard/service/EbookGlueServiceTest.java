@@ -27,7 +27,7 @@ public class EbookGlueServiceTest {
         EbookGlueService ebookGlueService = new EbookGlueService();
         File file=null;
         try {
-           file=  ebookGlueService.sendGet(urlToConvert,outputFormat);
+           file=  ebookGlueService.sendGet(urlToConvert,outputFormat,"title");
         } catch (Exception e) {
             e.printStackTrace();
         }

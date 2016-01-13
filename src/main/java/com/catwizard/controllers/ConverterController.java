@@ -9,6 +9,9 @@ import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
@@ -36,7 +39,7 @@ public class ConverterController {
             method = RequestMethod.POST,
             produces = "application/json")
     @ResponseBody
-    public RestResponse convert(@RequestBody ConvertRequest convertRequest) {
+    public ResponseEntity<RestResponse> convert(@RequestBody ConvertRequest convertRequest) {
 
         log.info("Got convert request with "+convertRequest.toString());
 
@@ -48,6 +51,21 @@ public class ConverterController {
 
         }else{
 
+            File file=null;
+
+            try {
+                file=  ebookGlueService.sendGet(convertRequest.getUrl(),convertRequest.getFormat(),convertRequest.getTitle()+"."+convertRequest.getFormat());
+
+                emailService.sendMail("You got content "+convertRequest.getEmail(),
+                                    "Hello, this is the result of your ebookme request",
+                                    file,
+                                    convertRequest.getEmail());
+            } catch (Exception e) {
+
+                return new ResponseEntity<RestResponse>(restResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+
+            }
+
             String response = "Fomat "+ convertRequest.getFormat()+" still not soported";
 
             log.info(response);
@@ -56,8 +74,7 @@ public class ConverterController {
 
         }
 
-
-        return restResponse;
+        return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 
     }
 
