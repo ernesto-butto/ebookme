@@ -1,12 +1,23 @@
 
 
 
-<ion-view title="ebookme">
+<ion-view title="ebookme" >
 
 
   <ion-content overflow-scroll="true" padding="true" class="has-header">
 
+    <div class="card card-failure" ng-if="errorMessage">
+      <div class="item item-text-wrap">
+        {{errorMessage}}
+      </div>
+    </div>
 
+
+    <div class="card card-success" ng-if="successMessage">
+        <div class="item item-text-wrap">
+          {{successMessage}}
+        </div>
+      </div>
 
     <form name="convertForm" class="list" novalidate>
 
@@ -48,11 +59,11 @@
       </div>
 
       <div class="error-container" ng-show="convertForm.email.$error.pattern" >
-            <div class="error" >
-              <i class="ion-information-circled"></i>
-              Email not valid
-            </div>
-          </div>
+        <div class="error" >
+          <i class="ion-information-circled"></i>
+          Email not valid
+        </div>
+      </div>
 
       <label class="item item-select">
         <span class="input-label">Format</span>
@@ -62,7 +73,9 @@
           <option selected value="HTML" >HTML</option>
         </select>
       </label>
+
       <button class="button button-positive button-block button-large"  ng-disabled="convertForm.$pristine || convertForm.$invalid" ng-click="sendUrlToConvert()">Send</button>
+      <button class="button button-default button-block button-large"   ng-click="reset()">Reset</button>
     </form>
   </ion-content>
 
