@@ -42,6 +42,7 @@ public class HtmlServiceTest {
     }
 
     @Test
+    @Ignore
     public void getHtmlContentAndSendToEmail(){
 
         HtmlService htmlService = new HtmlService();
