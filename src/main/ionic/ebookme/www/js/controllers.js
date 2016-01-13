@@ -19,16 +19,16 @@ angular.module('app.controllers', ['ngResource'])
 
       EbookMeService.restConvert().sendUrl($scope.urlToConvert,function(){
 
+
         $ionicLoading.hide();
-        $scope.successMessage = "url successfully converted, check your email";
+        $scope.successMessage = "Url successfully converted, check your email";
         $scope.convertForm.$setPristine();
+
 
       },function(er){
 
         $ionicLoading.hide();
-        $scope.errorMessage = "the convertion of your content failed, please try again later";
-
-
+        $scope.errorMessage = "The convertion of your content failed, please try again later";
 
       })
     };
