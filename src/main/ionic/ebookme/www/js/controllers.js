@@ -2,7 +2,7 @@ angular.module('app.controllers', ['ngResource'])
 
 .controller('ebookmeCtrl', function($scope,EbookMeService) {
 
-    $scope.urlToConvert = {url:"",email:"",format:"HTML"};
+    $scope.urlToConvert = {title:"",url:"",email:"",format:"HTML"};
 
     $scope.sendUrlToConvert = function(){
 
