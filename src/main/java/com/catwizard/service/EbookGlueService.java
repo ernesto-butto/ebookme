@@ -1,5 +1,7 @@
 package com.catwizard.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -14,13 +16,14 @@ public class EbookGlueService {
 
     String apiKey = "cfe5hqnhfcq3bez7lgpn24g4qux5ilz4";
     String ebookUrlService = "https://ebookglue.com/convert";
-    String fileName= "/Users/poolebu/Desktop/book2.mobi";
+
+    private final Logger log = LoggerFactory.getLogger(EbookGlueService.class);
 
     private final String USER_AGENT = "Mozilla/5.0";
 
     // HTTP GET request
 
-    public File sendGet(String urlToConvert,String format) throws Exception {
+    public File sendGet(String urlToConvert,String format, String fileName) throws Exception {
 
         String url = ebookUrlService + "?token="+apiKey + "&url="+urlToConvert+"&format="+format;
 
@@ -34,8 +37,8 @@ public class EbookGlueService {
         openConnection.setRequestProperty("User-Agent", USER_AGENT);
 
         int responseCode = openConnection.getResponseCode();
-        System.out.println("\nSending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
+        log.info("\nSending 'GET' request to URL : " + url);
+        log.info("Response Code : " + responseCode);
 
         // Dealing with the response
         InputStream inputStream = null;
@@ -54,11 +57,14 @@ public class EbookGlueService {
                 outputStream.write(bytes, 0, read);
             }
 
-            System.out.println("Done!");
+            log.info("Done writing to file "+fileName);
 
         } catch (IOException e) {
-            e.printStackTrace();
+
+            log.error(e.getMessage());
+
         } finally {
+
             if (inputStream != null) {
                 try {
                     inputStream.close();
