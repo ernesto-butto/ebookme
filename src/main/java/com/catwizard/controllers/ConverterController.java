@@ -65,7 +65,7 @@ public class ConverterController {
 
         String htmlContent = htmlService.getHtmlContent(convertRequest.getUrl());
 
-        File file = htmlService.saveHtmlContentToFile(htmlContent, "ebookContent");
+        File file = htmlService.saveHtmlContentToFile(htmlContent, convertRequest.getTitle());
 
         try {
 
