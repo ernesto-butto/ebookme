@@ -1,6 +1,6 @@
 {
   "name": "ebookme",
-  "app_id": "",
+  "app_id": "8536bd94",
   "gulpStartupTasks": [
     "sass",
     "watch"
