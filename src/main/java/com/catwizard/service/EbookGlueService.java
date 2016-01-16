@@ -14,12 +14,20 @@ import java.net.URL;
 @Service
 public class EbookGlueService {
 
-    String apiKey = "cfe5hqnhfcq3bez7lgpn24g4qux5ilz4";
-    String ebookUrlService = "https://ebookglue.com/convert";
+    private String apiKey = "xxx";
+    private String ebookUrlService = "https://ebookglue.com/convert";
 
     private final Logger log = LoggerFactory.getLogger(EbookGlueService.class);
 
     private final String USER_AGENT = "Mozilla/5.0";
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
 
     // HTTP GET request
 

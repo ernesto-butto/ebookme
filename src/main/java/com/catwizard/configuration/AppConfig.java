@@ -1,5 +1,6 @@
 package com.catwizard.configuration;
 
+import com.catwizard.service.EbookGlueService;
 import com.catwizard.service.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,9 @@ public class AppConfig {
     @Autowired
     EmailService emailService;
 
+    @Autowired
+    EbookGlueService ebookGlueService;
+
     private final Logger log = LoggerFactory.getLogger(AppConfig.class);
 
 
@@ -31,6 +35,7 @@ public class AppConfig {
 
         emailService.setUsername(env.getProperty("email"));
         emailService.setPassword(env.getProperty("password"));
+        ebookGlueService.setApiKey(env.getProperty("eglueApiKey"));
 
         log.info("loading user and login gmail password");
 
