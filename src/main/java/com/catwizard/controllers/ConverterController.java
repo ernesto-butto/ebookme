@@ -53,7 +53,7 @@ public class ConverterController {
             File file=null;
 
             try {
-                file=  ebookGlueService.sendGetToEglueService(convertRequest.getUrl(), convertRequest.getFormat(), convertRequest.getTitle() + "." + convertRequest.getFormat());
+                file=  ebookGlueService.sendGetToCalibreServer(convertRequest.getUrl(), convertRequest.getFormat(), convertRequest.getTitle() + "." + convertRequest.getFormat());
 
                 emailService.sendMail("You got content "+convertRequest.getEmail(),
                                     "Hello, this is the result of your ebookme request",
