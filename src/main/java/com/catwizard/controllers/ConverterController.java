@@ -53,7 +53,7 @@ public class ConverterController {
             File file=null;
 
             try {
-                file=  ebookGlueService.sendGetToCalibreServer(convertRequest.getUrl(), convertRequest.getFormat(), convertRequest.getTitle() + "." + convertRequest.getFormat());
+                file=  ebookGlueService.sendGetToCalibreServer(convertRequest.getUrl(), convertRequest.getFormat(), convertRequest.getTitle());
 
                 emailService.sendMail("You got content "+convertRequest.getEmail(),
                                     "Hello, this is the result of your ebookme request",
@@ -65,7 +65,7 @@ public class ConverterController {
 
             }
 
-            String response = "Fomat "+ convertRequest.getFormat()+" still not soported";
+            String response = "Got it: "+file.getAbsolutePath();
 
             log.info(response);
 
