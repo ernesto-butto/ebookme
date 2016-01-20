@@ -2,6 +2,7 @@ package com.catwizard.service;
 
 import com.catwizard.MainApplication;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -16,20 +17,44 @@ import java.io.File;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MainApplication.class)
 @WebAppConfiguration
-public class EbookGlueServiceTest {
+public class ConversionServiceTest {
 
     String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html";
     String outputFormat = "MOBI";
 
     @Test
-    public void sendGetTest(){
+    @Ignore
+    public void sendGetToEglueServiceTest(){
 
-        EbookGlueService ebookGlueService = new EbookGlueService();
+        EbookConversionService ebookGlueService = new EbookConversionService();
         File file=null;
         try {
-           file=  ebookGlueService.sendGet(urlToConvert,outputFormat,"title");
+
+            file=  ebookGlueService.sendGetToEglueService(urlToConvert, outputFormat, "title");
+
         } catch (Exception e) {
+
             e.printStackTrace();
+
+        }
+
+        Assert.assertTrue(file.exists());
+
+    }
+
+    @Test
+    public void sendGetToCalibreServerTest(){
+
+        EbookConversionService ebookGlueService = new EbookConversionService();
+        File file=null;
+        try {
+
+            file=  ebookGlueService.sendGetToCalibreServer(urlToConvert, outputFormat, "title");
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
         }
 
         Assert.assertTrue(file.exists());
