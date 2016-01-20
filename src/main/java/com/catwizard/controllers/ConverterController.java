@@ -2,14 +2,13 @@ package com.catwizard.controllers;
 
 import com.catwizard.domain.ConvertRequest;
 import com.catwizard.domain.RestResponse;
-import com.catwizard.service.EbookGlueService;
+import com.catwizard.service.EbookConversionService;
 import com.catwizard.service.EmailService;
 import com.catwizard.service.HtmlService;
 import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,7 @@ public class ConverterController {
     HtmlService htmlService;
 
     @Autowired
-    EbookGlueService ebookGlueService;
+    EbookConversionService ebookGlueService;
 
 
     @RequestMapping(value = "/convert",
@@ -54,7 +53,7 @@ public class ConverterController {
             File file=null;
 
             try {
-                file=  ebookGlueService.sendGet(convertRequest.getUrl(),convertRequest.getFormat(),convertRequest.getTitle()+"."+convertRequest.getFormat());
+                file=  ebookGlueService.sendGetToEglueService(convertRequest.getUrl(), convertRequest.getFormat(), convertRequest.getTitle() + "." + convertRequest.getFormat());
 
                 emailService.sendMail("You got content "+convertRequest.getEmail(),
                                     "Hello, this is the result of your ebookme request",
