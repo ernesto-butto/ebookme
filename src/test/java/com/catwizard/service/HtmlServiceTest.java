@@ -53,15 +53,7 @@ public class HtmlServiceTest {
 
         File file = htmlService.saveHtmlContentToFile(htmlContent, "ebookContent");
 
-        try {
-
-            emailService.sendMail("htmlContent test","Trying stuff with this content",file,"poolebu@gmail.com");
-
-        } catch (EmailException e) {
-
-            e.printStackTrace();
-
-        }
+        emailService.sendMail("htmlContent test","Trying stuff with this content",file,"poolebu@gmail.com");
 
     }
 
