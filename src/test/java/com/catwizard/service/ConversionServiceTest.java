@@ -19,7 +19,7 @@ import java.io.File;
 @WebAppConfiguration
 public class ConversionServiceTest {
 
-    String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html";
+    String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-2-code-refactoring.html";
     String outputFormat = "MOBI";
 
     @Test
@@ -49,7 +49,7 @@ public class ConversionServiceTest {
         File file=null;
         try {
 
-            file=  ebookGlueService.sendGetToCalibreServer(urlToConvert, outputFormat, "title");
+            file=  ebookGlueService.sendGetToCalibreServer(urlToConvert, outputFormat, "Code Refactoring.MOBI");
 
         } catch (Exception e) {
 
