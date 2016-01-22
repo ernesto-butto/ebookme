@@ -1,5 +1,6 @@
 package com.catwizard.service;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.net.URL;
 @Service
 public class EbookConversionService {
 
+    public static final String HOST = "http://ec2-54-84-106-242.compute-1.amazonaws.com:8080";
     private String EglueKey = "xxx";
     private String ebookUrlService = "https://ebookglue.com/convert";
 
@@ -32,11 +34,12 @@ public class EbookConversionService {
 
     public File sendGetToCalibreServer(String urlToConvert, String format, String fileName) throws Exception {
 
-        // http://ec2-54-84-106-242.compute-1.amazonaws.com:8080/convert?htmlUrl=http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html&title=madeupTitle&mobi
 
-        //http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html
-        String host = "http://ec2-54-84-106-242.compute-1.amazonaws.com:8080";
-        String url = host + "/convert?htmlUrl="+urlToConvert+"&title="+fileName+"&"+format;
+        fileName = FilenameUtils.removeExtension(fileName);
+        // replace white spaces with underscore
+        fileName = fileName.replaceAll(" ", "_");
+
+        String url = HOST + "/convert?htmlUrl="+urlToConvert+"&title="+fileName+"&"+format;
 
         log.info("Sending request for convertion to " + url);
 
@@ -60,6 +63,9 @@ public class EbookConversionService {
         try {
 
             inputStream = openConnection.getInputStream();
+
+            // Adds the extension to the file name
+            fileName = fileName+"."+format.toLowerCase();
 
             outputStream = new FileOutputStream(fileName);
 

@@ -34,12 +34,7 @@ public class EmailServiceTest {
 
         File file = new File("/Users/poolebu/Desktop/book2.mobi");
 
-        try {
-            emailService.sendMail(subject,content,file,toEmail);
-        } catch (EmailException e) {
-            e.printStackTrace();
-        }
-
+        emailService.sendMail(subject,content,file,toEmail);
 
     }
 
@@ -54,12 +49,7 @@ public class EmailServiceTest {
 
         File file = htmlService.saveHtmlContentToFile(htmlContent,"ebookContent");
 
-
-        try {
-            emailService.sendMail("htmlContent test","Trying stuff with this content",file,"poolebu@gmail.com");
-        } catch (EmailException e) {
-            e.printStackTrace();
-        }
+        emailService.sendMail("htmlContent test","Trying stuff with this content",file,"poolebu@gmail.com");
 
 
     }

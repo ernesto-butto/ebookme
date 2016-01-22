@@ -44,7 +44,7 @@ public class EmailService {
 		this.password = password;
 	}
 
-	public void sendMail(String subject, String content,File fileAttachment,String recepient) throws EmailException {
+	public void sendMail(String subject, String content,File fileAttachment,String recepient) {
 
 
 		// Create the attachment
@@ -53,24 +53,28 @@ public class EmailService {
 		attachment.setPath(fileAttachment.getPath());
 		attachment.setDisposition(EmailAttachment.ATTACHMENT);
 
+		try {
+			// Populate message
+			MultiPartEmail email = new MultiPartEmail();
+			email.setHostName("smtp.googlemail.com");
+			email.setSmtpPort(465);
+			email.setAuthenticator(new DefaultAuthenticator(username, password));
+			email.setSSL(true);
+			email.setFrom(username);
+			email.setSubject(subject);
+			email.setMsg(content);
+			email.addTo(recepient);
 
-		// Populate message
-		MultiPartEmail email = new MultiPartEmail();
-		email.setHostName("smtp.googlemail.com");
-		email.setSmtpPort(465);
-		email.setAuthenticator(new DefaultAuthenticator(username, password));
-		email.setSSL(true);
-		email.setFrom(username);
-		email.setSubject(subject);
-		email.setMsg(content);
-		email.addTo(recepient);
+			// Attach
+			email.attach(attachment);
 
-		// Attach
-		email.attach(attachment);
+			// Send
+			email.send();
 
-		// Send
-		email.send();
+		}catch (Exception e){
 
+			e.printStackTrace();
+		}
 
 	}
 }

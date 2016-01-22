@@ -5,7 +5,6 @@ import com.catwizard.domain.RestResponse;
 import com.catwizard.service.EbookConversionService;
 import com.catwizard.service.EmailService;
 import com.catwizard.service.HtmlService;
-import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,63 +44,58 @@ public class ConverterController {
 
         RestResponse restResponse = new RestResponse("Got request "+ convertRequest.toString());
 
+        File fileToSend=null;
+
+        // If is html, convert and send
         if (convertRequest.getFormat().equalsIgnoreCase("HTML")){
 
-            htmlConvertAndSendEmail(convertRequest, restResponse);
+            fileToSend=htmlConvert(convertRequest, restResponse);
 
+            // else, send to calibreServer for conversion
         }else{
 
-            File file=null;
-
             try {
-                String title=convertRequest.getTitle();
-                title = FilenameUtils.removeExtension(title);
-                       // replace white spaces with underscore
-                       title = title.replaceAll(" ", "_");
-                file=  ebookGlueService.sendGetToCalibreServer(convertRequest.getUrl(), convertRequest.getFormat(), title);
 
-                emailService.sendMail("You got content "+convertRequest.getEmail(),
-                                    "Hello, this is the result of your ebookme request",
-                                    file,
-                                    convertRequest.getEmail());
+
+               fileToSend=  ebookGlueService.sendGetToCalibreServer(convertRequest.getUrl(), convertRequest.getFormat(), convertRequest.getTitle());
+
+
             } catch (Exception e) {
 
                 return new ResponseEntity<RestResponse>(restResponse,HttpStatus.INTERNAL_SERVER_ERROR);
 
             }
 
-            String response = "Got it: "+file.getAbsolutePath();
 
-            log.info(response);
-
-            restResponse.setResponse(response);
 
         }
+
+        String response = "Got it: "+fileToSend.getAbsolutePath();
+
+        log.info(response);
+
+        log.info("Sending email to user :"+ convertRequest.getEmail());
+
+        emailService.sendMail("You got content " + convertRequest.getEmail(),
+                "Hello, this is the result of your ebookme request",
+                fileToSend,
+                convertRequest.getEmail());
+
+
+        restResponse.setResponse(response);
 
         return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 
     }
 
-    private void htmlConvertAndSendEmail(@RequestBody ConvertRequest convertRequest, RestResponse restResponse) {
+    private File htmlConvert(@RequestBody ConvertRequest convertRequest, RestResponse restResponse) {
 
         String htmlContent = htmlService.getHtmlContent(convertRequest.getUrl());
 
         File file = htmlService.saveHtmlContentToFile(htmlContent, convertRequest.getTitle());
 
-        try {
+        return file;
 
-            emailService.sendMail("You got content "+convertRequest.getEmail(),
-                    "Hello, this is the result of your ebookme request",
-                    file,
-                    convertRequest.getEmail());
-
-            restResponse.setResponse("Mail sent succesfully");
-
-        } catch (EmailException e) {
-
-            restResponse.setResponse("Error sending email: "+e.getMessage());
-
-        }
     }
 
 
