@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 
@@ -53,7 +54,11 @@ public class ConverterController {
             File file=null;
 
             try {
-                file=  ebookGlueService.sendGetToCalibreServer(convertRequest.getUrl(), convertRequest.getFormat(), convertRequest.getTitle());
+                String title=convertRequest.getTitle();
+                title = FilenameUtils.removeExtension(title);
+                       // replace white spaces with underscore
+                       title = title.replaceAll(" ", "_");
+                file=  ebookGlueService.sendGetToCalibreServer(convertRequest.getUrl(), convertRequest.getFormat(), title);
 
                 emailService.sendMail("You got content "+convertRequest.getEmail(),
                                     "Hello, this is the result of your ebookme request",
