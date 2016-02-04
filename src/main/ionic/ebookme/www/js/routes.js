@@ -21,12 +21,13 @@ angular.module('app.routes', [])
       .state('tabsController.ebookme', {
         url: '/convert',
         params:{
-          suggestion:null
+          title:null ,
+          url:null
         },
         views: {
           'tab3': {
             templateUrl: 'templates/ebookme.html',
-            controller: 'ebookmeCtrl'
+            controller: 'EbookmeCtrl'
           }
         }
       })
@@ -36,7 +37,7 @@ angular.module('app.routes', [])
           views: {
             'tabSuggestions': {
               templateUrl: 'templates/suggestions.html',
-              controller: 'suggestionsCtrl'
+              controller: 'SuggestionsCtrl'
             }
           }
         })
