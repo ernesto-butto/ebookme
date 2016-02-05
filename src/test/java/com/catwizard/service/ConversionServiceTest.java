@@ -20,7 +20,7 @@ import java.io.File;
 public class ConversionServiceTest {
 
     String urlToConvert = "http://jessewarden.com/2008/11/agile-chronicles-2-code-refactoring.html";
-    String outputFormat = "MOBI";
+    String outputFormat = "PDF";
 
     @Test
     @Ignore
@@ -49,7 +49,7 @@ public class ConversionServiceTest {
         File file=null;
         try {
 
-            file=  ebookGlueService.sendGetToCalibreServer(urlToConvert, outputFormat, "Code Refactoring.MOBI");
+            file=  ebookGlueService.sendGetToCalibreServer(urlToConvert, outputFormat, "Code Refactoring");
 
         } catch (Exception e) {
 
