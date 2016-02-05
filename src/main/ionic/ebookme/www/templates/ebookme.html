@@ -14,10 +14,10 @@
 
 
     <div class="card card-success" ng-if="successMessage">
-        <div class="item item-text-wrap">
-          {{successMessage}}
-        </div>
+      <div class="item item-text-wrap">
+        {{successMessage}}
       </div>
+    </div>
 
     <form name="convertForm" class="list" novalidate>
 
@@ -46,10 +46,29 @@
         </div>
       </div>
 
+
+
+
       <label class="item item-input" ng-class="{ 'has-errors' : convertForm.email.$invalid, 'no-errors' : convertForm.email.$valid}">
         <span class="input-label">Email</span>
         <input type="email" name="email" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z.]{2,5}$/" placeholder="email to send ebook" ng-model="urlToConvert.email" required>
       </label>
+      <ion-list show-delete="true"   can-swipe="false">
+        <div ng-repeat="email in urlToConvert.emailsSaved | filter:urlToConvert.email">
+          <ion-item  ng-click="setEmail(email)">
+            {{email}}
+            <!-- <ion-option-button class="button-assertive ion-trash-b" ></ion-option-button>
+            <ion-option-button class="button-info"
+                               ng-click="edit(item)">
+              Edit
+            </ion-option-button> -->
+            <ion-delete-button class="ion-trash-b"
+                               ng-click="items.splice($index, 1)">
+            </ion-delete-button>
+
+          </ion-item>
+        </div>
+      </ion-list>
 
       <div class="error-container" ng-show="convertForm.email.$error.required" >
         <div class="error" >
@@ -77,6 +96,13 @@
       <button class="button button-positive button-block button-large"  ng-disabled="convertForm.$pristine || convertForm.$invalid" ng-click="sendUrlToConvert()">Send</button>
       <button class="button button-default button-block button-large"   ng-click="reset()">Reset</button>
     </form>
+
+
+
+
+
+
+
   </ion-content>
 
 </ion-view>

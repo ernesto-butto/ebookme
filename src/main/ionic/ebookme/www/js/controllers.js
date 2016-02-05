@@ -1,11 +1,27 @@
 angular.module('app.controllers', ['ngResource'])
 
-  .controller('ebookmeCtrl', function($scope,EbookMeService,$ionicLoading,$timeout,$stateParams) {
+  .controller('ebookmeCtrl', function($scope,EbookMeService,$ionicLoading,$timeout,$stateParams,StorageService) {
 
     if($stateParams.suggestion){
-      $scope.urlToConvert = {title:$stateParams.suggestion.title,url:$stateParams.suggestion.url,email:"",format:"HTML"};
+      $scope.urlToConvert = {title:$stateParams.suggestion.title,url:$stateParams.suggestion.url,email:"",format:"HTML",emailsSaved:StorageService.get('emailsSaved')};
     }else
-      $scope.urlToConvert = {title:"",url:"",email:"",format:"HTML"};
+      $scope.urlToConvert = {title:"",url:"",email:"",format:"HTML",emailsSaved:StorageService.get('emailsSaved')};
+
+
+    var addEmailToLocalStorage = function (email){
+
+      var emailsSaved = StorageService.get('emailsSaved');
+
+      if(emailsSaved.indexOf(email)== -1){
+
+        emailsSaved.push(email);
+
+      }
+
+      StorageService.set('emailsSaved',emailsSaved);
+
+    };
+
 
     $scope.sendUrlToConvert = function(){
 
@@ -19,6 +35,8 @@ angular.module('app.controllers', ['ngResource'])
         maxWidth: 200,
         showDelay: 0
       });
+
+      addEmailToLocalStorage($scope.urlToConvert.email);
 
       EbookMeService.restConvert().sendUrl($scope.urlToConvert,function(){
 
@@ -46,15 +64,13 @@ angular.module('app.controllers', ['ngResource'])
       $scope.successMessage = undefined;
       $scope.errorMessage = undefined;
 
-    }
+    };
 
-    $scope.copyText = function(value) {
-      $cordovaClipboard.copy(value).then(function() {
-        console.log("Copied text");
-      }, function() {
-        console.error("There was an error copying");
-      });
-    }
+
+    $scope.setEmail = function (email){
+      $scope.urlToConvert.email=email;
+    };
+
 
 
   })
