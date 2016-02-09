@@ -2,8 +2,8 @@ angular.module('app.controllers', ['ngResource'])
 
   .controller('ebookmeCtrl', function($scope,EbookMeService,$ionicLoading,$timeout,$stateParams,StorageService) {
 
-    if($stateParams.suggestion){
-      $scope.urlToConvert = {title:$stateParams.suggestion.title,url:$stateParams.suggestion.url,email:"",format:"HTML",emailsSaved:StorageService.get('emailsSaved')};
+    if($stateParams.title && $stateParams.url){
+      $scope.urlToConvert = {title:$stateParams.title,url:$stateParams.url,email:"",format:"HTML",emailsSaved:StorageService.get('emailsSaved')};
     }else
       $scope.urlToConvert = {title:"",url:"",email:"",format:"HTML",emailsSaved:StorageService.get('emailsSaved')};
 
@@ -75,12 +75,12 @@ angular.module('app.controllers', ['ngResource'])
 
   })
 
-  .controller('suggestionsCtrl', function($scope,$state) {
+  .controller('SuggestionsCtrl', function($scope,$state) {
 
 
     $scope.sendToForm = function(item){
 
-      $state.go("tabsController.ebookme",{suggestion:{title:item.title,url:item.url}}) ;
+      $state.go("tabsController.ebookme",{title:item.title,url:item.url}) ;
     };
 
     $scope.listLinks = [
