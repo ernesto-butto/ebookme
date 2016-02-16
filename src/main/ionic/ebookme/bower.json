@@ -6,6 +6,7 @@
     "ionic-platform-web-client": "~0.2.1"
   } ,
   "dependencies":{
-    "angular-filter" :"latest"
+    "angular-filter" :"latest",
+    "ngstorage":"0.3.10"
   }
 }
