@@ -15,6 +15,7 @@ import java.net.URL;
 @Service
 public class EbookConversionService {
 
+    // public static final String HOST = "ebookme-server.catwizard.io:8080";
     public static final String HOST = "http://ec2-54-84-106-242.compute-1.amazonaws.com:8080";
     private String EglueKey = "xxx";
     private String ebookUrlService = "https://ebookglue.com/convert";
@@ -39,7 +40,7 @@ public class EbookConversionService {
         // replace white spaces with underscore
         fileName = fileName.replaceAll(" ", "_");
 
-        String url = HOST + "/convert?htmlUrl="+urlToConvert+"&title="+fileName+"&"+format;
+        String url = HOST + "/convert?htmlUrl="+urlToConvert+"&title="+fileName+"&outputFormat="+format;
 
         log.info("Sending request for convertion to " + url);
 
