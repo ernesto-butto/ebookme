@@ -51,30 +51,19 @@
 
       <label class="item item-input" ng-class="{ 'has-errors' : convertForm.email.$invalid, 'no-errors' : convertForm.email.$valid}">
         <span class="input-label">Email</span>
-        <!--<input type="email" name="email" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z.]{2,5}$/" placeholder="email to send ebook"
-               ng-model="urlToConvertemail"
-               required> -->
-       <!-- <input type="text" name="email" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z.]{2,5}$/" placeholder="email to send ebook"
-                      ng-model="urlToConvertemail"
-                      required>      -->
 
-        <input type="text" name="email"   ng-model="urlToConvert.email.text"
+        <input type="text" name="email"   ng-model="urlToConvert.email"
                placeholder="email to send ebook" required>
-
-
-
 
       </label>
 
 
-      <ul ng-if="urlToConvert.email.text!=''">
-        <li  class="li-list" ng-repeat="email in emailsSaved | filter:{text:urlToConvert.email.text}:strict "  ng-click="setEmail(email);">
+      <ul  ng-if="convertForm.email.$valid">
+        <li  class="li-list" ng-repeat="email in emailsSaved | filter:urlToConvert.email:strict "  ng-click="setEmail(email);">
         <div class="row">
           <div class="col col-10"></div>
-         <div class="col col-70">  {{email.text}}</div>
+         <div class="col col-70">  {{email}}</div>
           <div class="col ">
-
-
             <button type="button"  class="button button-assertive button-small icon ion-trash-b" ng-click="emailsSaved.splice($index, 1)">   </button>
           </div>
 
@@ -84,13 +73,7 @@
 
         </li>
       </ul>
-      <!--    {{emailM}}emailM
-      {{convertForm.email.$error}} convertForm.email.$error
-      <div ng-messages="convertForm.email.$error">
 
-        <div ng-message="email">Postal Code Invalid</div>
-
-      </div>   -->
 
       <div class="error-container" ng-show="convertForm.email.$error.required" >
         <div class="error" >
@@ -99,12 +82,6 @@
         </div>
       </div>
 
-    <!--  <div class="error-container" ng-show="convertForm.email.$error.pattern" >
-        <div class="error" >
-          <i class="ion-information-circled"></i>
-          Email not valid
-        </div>
-      </div>  -->
 
       <label class="item item-select">
         <span class="input-label">Format</span>

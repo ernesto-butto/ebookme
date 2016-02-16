@@ -5,25 +5,26 @@ angular.module('app.controllers', ['ngResource'])
 
     $scope.emailsSaved = StorageService.get('emailsSaved');
 
-    //  $scope.urlToConvertemail = "ddd";
+
 
     if($stateParams.title && $stateParams.url){
 
-      $scope.urlToConvert = {title:$stateParams.title,url:$stateParams.url,email:{text: ''},format:"HTML"};
+      $scope.urlToConvert = {title:$stateParams.title,url:$stateParams.url,email:'',format:"HTML"};
 
     }else
 
-      $scope.urlToConvert = {title:"",url:"",email:{text: ''},format:"HTML"};
+      $scope.urlToConvert = {title:"",url:"",email:'',format:"HTML"};
 
 
     var addEmailToLocalStorage = function (email){
 
-      //  var emailsSaved = StorageService.get('emailsSaved');
+
 
       var flag =false;
+
       for(var i=0; i < $scope.emailsSaved.length;i++){
 
-        if($scope.emailsSaved[i].text.indexOf(email.text)> -1){
+        if($scope.emailsSaved[i].indexOf(email)> -1){
 
           flag=true;
 
@@ -80,15 +81,7 @@ angular.module('app.controllers', ['ngResource'])
       });
 
 
-      /* $timeout(function() {
 
-       $ionicLoading.hide();
-       $scope.successMessage = "Url successfully converted, check your email";
-       addEmailToLocalStorage($scope.urlToConvert.email);
-       resetForm(form);
-
-
-       },2000); */
     };
 
 
