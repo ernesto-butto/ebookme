@@ -51,24 +51,46 @@
 
       <label class="item item-input" ng-class="{ 'has-errors' : convertForm.email.$invalid, 'no-errors' : convertForm.email.$valid}">
         <span class="input-label">Email</span>
-        <input type="email" name="email" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z.]{2,5}$/" placeholder="email to send ebook" ng-model="urlToConvert.email" required>
-      </label>
-      <ion-list show-delete="true"   can-swipe="false">
-        <div ng-repeat="email in urlToConvert.emailsSaved | filter:urlToConvert.email">
-          <ion-item  ng-click="setEmail(email)">
-            {{email}}
-            <!-- <ion-option-button class="button-assertive ion-trash-b" ></ion-option-button>
-            <ion-option-button class="button-info"
-                               ng-click="edit(item)">
-              Edit
-            </ion-option-button> -->
-            <ion-delete-button class="ion-trash-b"
-                               ng-click="items.splice($index, 1)">
-            </ion-delete-button>
+        <!--<input type="email" name="email" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z.]{2,5}$/" placeholder="email to send ebook"
+               ng-model="urlToConvertemail"
+               required> -->
+       <!-- <input type="text" name="email" ng-pattern="/^[a-zA-Z]+[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z.]{2,5}$/" placeholder="email to send ebook"
+                      ng-model="urlToConvertemail"
+                      required>      -->
 
-          </ion-item>
+        <input type="text" name="email"   ng-model="urlToConvert.email.text"
+               placeholder="email to send ebook" required>
+
+
+
+
+      </label>
+
+
+      <ul ng-if="urlToConvert.email.text!=''">
+        <li  class="li-list" ng-repeat="email in emailsSaved | filter:{text:urlToConvert.email.text}:strict "  ng-click="setEmail(email);">
+        <div class="row">
+          <div class="col col-10"></div>
+         <div class="col col-70">  {{email.text}}</div>
+          <div class="col ">
+
+
+            <button type="button"  class="button button-assertive button-small icon ion-trash-b" ng-click="emailsSaved.splice($index, 1)">   </button>
+          </div>
+
         </div>
-      </ion-list>
+
+
+
+        </li>
+      </ul>
+      <!--    {{emailM}}emailM
+      {{convertForm.email.$error}} convertForm.email.$error
+      <div ng-messages="convertForm.email.$error">
+
+        <div ng-message="email">Postal Code Invalid</div>
+
+      </div>   -->
 
       <div class="error-container" ng-show="convertForm.email.$error.required" >
         <div class="error" >
@@ -77,12 +99,12 @@
         </div>
       </div>
 
-      <div class="error-container" ng-show="convertForm.email.$error.pattern" >
+    <!--  <div class="error-container" ng-show="convertForm.email.$error.pattern" >
         <div class="error" >
           <i class="ion-information-circled"></i>
           Email not valid
         </div>
-      </div>
+      </div>  -->
 
       <label class="item item-select">
         <span class="input-label">Format</span>
@@ -94,10 +116,9 @@
         </select>
       </label>
 
-      <button class="button button-positive button-block button-large"  ng-disabled="convertForm.$pristine || convertForm.$invalid" ng-click="sendUrlToConvert()">Send</button>
-      <button class="button button-default button-block button-large"   ng-click="reset()">Reset</button>
+      <button class="button button-positive button-block button-large"  ng-disabled="convertForm.$pristine || convertForm.$invalid" ng-click="sendUrlToConvert(convertForm)">Send</button>
+      <button class="button button-default button-block button-large"   ng-click="resetAll(convertForm)">Reset</button>
     </form>
-
 
 
 
