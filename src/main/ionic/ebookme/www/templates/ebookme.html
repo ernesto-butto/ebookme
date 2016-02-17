@@ -49,20 +49,20 @@
 
 
 
-      <label class="item item-input" ng-class="{ 'has-errors' : convertForm.email.$invalid, 'no-errors' : convertForm.email.$valid}">
+      <label class="item item-input" ng-class="{ 'has-errors' : (convertForm.email.$invalid || !validEmail), 'no-errors' : (convertForm.email.$valid && validEmail)}">
         <span class="input-label">Email</span>
 
-        <input type="text" name="email"   ng-model="urlToConvert.email"
+        <input type="text" name='email' id='email'  ng-model="urlToConvert.email"  ng-change="validateEmail()"
                placeholder="email to send ebook" required>
 
       </label>
 
 
-      <ul  ng-if="convertForm.email.$valid">
+      <ul  ng-if="convertForm.email.$valid && !validEmail">
         <li  class="li-list" ng-repeat="email in emailsSaved | filter:urlToConvert.email:strict "  ng-click="setEmail(email);">
         <div class="row">
           <div class="col col-10"></div>
-         <div class="col col-70">  {{email}}</div>
+         <div class="col col-80">  {{email}}</div>
           <div class="col ">
             <button type="button"  class="button button-assertive button-small icon ion-trash-b" ng-click="emailsSaved.splice($index, 1)">   </button>
           </div>
@@ -73,6 +73,12 @@
 
         </li>
       </ul>
+      <div class="error-container" ng-show="!validEmail && !convertForm.email.$error.required" >
+              <div class="error" >
+                <i class="ion-information-circled"></i>
+                Email invalid
+              </div>
+            </div>
 
 
       <div class="error-container" ng-show="convertForm.email.$error.required" >
@@ -93,7 +99,7 @@
         </select>
       </label>
 
-      <button class="button button-positive button-block button-large"  ng-disabled="convertForm.$pristine || convertForm.$invalid" ng-click="sendUrlToConvert(convertForm)">Send</button>
+      <button class="button button-positive button-block button-large"  ng-disabled="convertForm.$pristine || convertForm.$invalid || !validEmail" ng-click="sendUrlToConvert(convertForm)">Send</button>
       <button class="button button-default button-block button-large"   ng-click="resetAll(convertForm)">Reset</button>
     </form>
 
