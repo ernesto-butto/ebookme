@@ -4,9 +4,10 @@ angular.module('app.services', ['ngStorage'])
     function($resource){
 
       var restConvert=function(){
-        return  $resource('http://ebookme.herokuapp.com/convert',null,
+        return  $resource('http://ebookme.herokuapp.com',null,
           {
-            'sendUrl': {method:'POST'}
+            'sendUrl': {url:'http://ebookme.herokuapp.com/convert',method:'POST'}
+
           });
       };
 
