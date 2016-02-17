@@ -120,43 +120,14 @@ angular.module('app.controllers', ['ngResource'])
 
 
 
-  .controller('SuggestionsCtrl', function($scope,$state) {
+  .controller('SuggestionsCtrl', function($scope,$state,preFetchSuggestionsList) {
 
+    $scope.listLinks = preFetchSuggestionsList;
 
     $scope.sendToForm = function(item){
 
       $state.go("tabsController.ebookme",{title:item.title,url:item.url}) ;
     };
-
-    $scope.listLinks = [
-      {
-        title:"Friedrich Nietzsche on Why a Fulfilling Life Requires Embracing Rather than Running from Difficulty",
-        url:"http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html",
-        category:"Practical Filosoy",
-        author:"cindy marin"
-      } ,
-      {
-        title:"Code Refactoring",
-        url:"http://jessewarden.com/2008/11/agile-chronicles-2-code-refactoring.html",
-        category:"Coding"
-      },
-      {
-        title:"Branch Workflow",
-        url:"http://jessewarden.com/2008/11/agile-chronicles-3-branch-workflow.html" ,
-        category:"Coding"
-      } ,
-      {
-        title:"French onion soup recipe",
-        url:"http://www.seriouseats.com/recipes/2016/01/pressure-cooker-french-onion-soup-recipe.html",
-        category:"Cooking"
-      } ,
-      {
-        title:"Where to Eat the Best Kouign Amann in NYC",
-        url:"http://www.seriouseats.com/2015/09/best-kouign-amann-nyc.html",
-        category:"Cooking"
-      }
-    ];
-
 
 
   });
