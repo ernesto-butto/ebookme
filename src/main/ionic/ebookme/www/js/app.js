@@ -8,11 +8,13 @@
 angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics','angular.filter',
   'app.controllers', 'app.routes', 'app.services', 'app.directives'])
 
-  .run(function($ionicPlatform,$ionicAnalytics,$window) {
+  .run(function($ionicPlatform,$ionicAnalytics,$window,EbookMeService) {
     $ionicPlatform.ready(function() {
 
 
       $ionicAnalytics.register();
+
+      EbookMeService.restConvert().get(function(){console.log("first get succeed")},function(){console.log("first get failed")})
 
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
