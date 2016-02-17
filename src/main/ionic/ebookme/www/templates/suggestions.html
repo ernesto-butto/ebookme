@@ -15,14 +15,19 @@
 
 
 
-          <div class="row item item-text-wrap" ng-repeat="item in value">
-            <div class="col col-30 ">{{ item.title }}</div>
-            <div class="col col-60">{{ item.url }}</div>
+        <div class="row item item-text-wrap responsive-sm" ng-repeat="item in value">
+          <div class="col">
+            <div class="row">
+              <div class="col"> <a target="_blank" href="{{  item.url }}">{{ item.title }} </a></div>
+            </div>
+            <div class="row">
+              <div class="col col-75"><a target="_blank" href="{{  item.url }}">{{ item.url }}</a></div>
 
-            <div class="col"> <button class="button  button-block button-large button-calm" ng-click="sendToForm(item)">convert</button></div>
+              <div class="col"> <button class="button icon ion-clipboard button-block button-large button-calm" ng-click="sendToForm(item)"></button></div>
+            </div>
           </div>
-
         </div>
+      </div>
 
 
 

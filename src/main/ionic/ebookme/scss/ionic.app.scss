@@ -27,7 +27,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
 
-
+body {
+  cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}
 
 .ebookMe-icon {
   background-repeat: no-repeat;
@@ -87,3 +89,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   font-weight: bold;
 }
 
+.li-list :hover {
+ background-color: $positive;
+}
