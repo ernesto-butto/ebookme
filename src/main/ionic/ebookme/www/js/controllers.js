@@ -130,9 +130,10 @@ angular.module('app.controllers', ['ngResource'])
 
     $scope.listLinks = [
       {
-        title:"Stressful",
+        title:"Friedrich Nietzsche on Why a Fulfilling Life Requires Embracing Rather than Running from Difficulty",
         url:"http://jessewarden.com/2008/11/agile-chronicles-1-stressful.html",
-        category:"Coding"
+        category:"Practical Filosoy",
+        author:"cindy marin"
       } ,
       {
         title:"Code Refactoring",
