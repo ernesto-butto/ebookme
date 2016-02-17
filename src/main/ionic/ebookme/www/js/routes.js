@@ -37,7 +37,12 @@ angular.module('app.routes', [])
           views: {
             'tabSuggestions': {
               templateUrl: 'templates/suggestions.html',
-              controller: 'SuggestionsCtrl'
+              controller: 'SuggestionsCtrl',
+              resolve:{
+                preFetchSuggestionsList: function(EbookMeService){
+                  return EbookMeService.restConvert().getSuggestionsList().$promise;
+                }
+              }
             }
           }
         })

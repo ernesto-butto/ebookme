@@ -6,7 +6,8 @@ angular.module('app.services', ['ngStorage'])
       var restConvert=function(){
         return  $resource('http://ebookme.herokuapp.com',null,
           {
-            'sendUrl': {url:'http://ebookme.herokuapp.com/convert',method:'POST'}
+            'sendUrl': {url:'http://ebookme.herokuapp.com/convert',method:'POST'},
+            'getSuggestionsList': {url:'http://ebookme.herokuapp.com/articleList/getList', method:'GET',isArray:true}
 
           });
       };
