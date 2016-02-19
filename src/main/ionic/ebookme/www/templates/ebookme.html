@@ -36,7 +36,7 @@
 
       <label class="item item-input" ng-class="{ 'has-errors' : convertForm.url.$invalid, 'no-errors' : convertForm.url.$valid}">
         <span class="input-label">URL</span>
-        <input type="text"  name="url" placeholder="link to convert" ng-model="urlToConvert.url" required>
+        <input type="text"  name="url" placeholder="link to convert" ng-model="urlToConvert.url"  autocapitalize="none" required>
       </label>
 
       <div class="error-container" ng-show="convertForm.url.$invalid" >
