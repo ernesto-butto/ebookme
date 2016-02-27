@@ -120,29 +120,30 @@ angular.module('app.controllers', ['ngResource'])
 
 
 
-  .controller('SuggestionsCtrl', function($scope,$state,$ionicLoading,EbookMeService,$timeout) {
+  .controller('SuggestionsCtrl', function($scope,$state,$ionicLoading,EbookMeService) {
 
 
     $ionicLoading.show({
+
       content: 'Loading',
       animation: 'fade-in',
       showBackdrop: true,
       maxWidth: 200,
       showDelay: 0
+
     });
 
     EbookMeService.restConvert().getSuggestionsList(function(preFetchSuggestionsList){
-      $ionicLoading.hide();
 
+      $ionicLoading.hide();
       $scope.listLinks = preFetchSuggestionsList;
+
     },function(error){
+
       $ionicLoading.hide();
       $scope.listLinks = [];
+
     });
-
-
-
-
 
     $scope.sendToForm = function(item){
 
