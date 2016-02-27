@@ -9,11 +9,11 @@ angular.module('app.controllers', ['ngResource'])
 
     if($stateParams.title && $stateParams.url){
 
-      $scope.urlToConvert = {title:$stateParams.title,url:$stateParams.url,email:'',format:"HTML"};
+      $scope.urlToConvert = {title:$stateParams.title,url:$stateParams.url,email:'',format:"PDF"};
 
     }else
 
-      $scope.urlToConvert = {title:"",url:"",email:'',format:"HTML"};
+      $scope.urlToConvert = {title:"ebook_content",url:"",email:'',format:"PDF"};
 
 
     var checkIfEmailExist = function(email){
