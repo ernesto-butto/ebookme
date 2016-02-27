@@ -42,7 +42,7 @@
       <label class="item item-input" ng-class="{ 'has-errors' : (convertForm.email.$invalid || !validEmail), 'no-errors' : (convertForm.email.$valid && validEmail)}">
         <span class="input-label">Email</span>
 
-        <input type="text" name='email' id='email'  ng-model="urlToConvert.email"  ng-change="validateEmail()"
+        <input type="text" name='email' id='email'  ng-model="urlToConvert.email"  ng-change="validateEmail()"   autocapitalize="none"
                placeholder="email to send ebook" required>
 
       </label>
