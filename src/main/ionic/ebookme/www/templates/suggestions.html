@@ -19,7 +19,7 @@
 
 
         <div class="row item item-text-wrap responsive-sm" ng-repeat="item in value">
-          <div class="col"> <a target="_blank" href="{{  item.url }}">{{ item.title }} </a></div>
+          <div class="col"> {{ item.title }} </div>
           <div class="col"><strong> Author:</strong> {{ item.author }} </div>
           <div class="col"> <button class="button icon ion-clipboard button-block button-large button-calm" ng-click="sendToForm(item)"></button></div>
 
