@@ -32,20 +32,16 @@ angular.module('app.routes', [])
         }
       })
 
-        .state('tabsController.suggestions', {
-          url: '/suggestions',
-          views: {
-            'tabSuggestions': {
-              templateUrl: 'templates/suggestions.html',
-              controller: 'SuggestionsCtrl',
-              resolve:{
-                preFetchSuggestionsList: function(EbookMeService){
-                  return EbookMeService.restConvert().getSuggestionsList().$promise;
-                }
-              }
-            }
+      .state('tabsController.suggestions', {
+        url: '/suggestions',
+        views: {
+          'tabSuggestions': {
+            templateUrl: 'templates/suggestions.html',
+            controller: 'SuggestionsCtrl'
+
           }
-        })
+        }
+      })
 
 
     ;
