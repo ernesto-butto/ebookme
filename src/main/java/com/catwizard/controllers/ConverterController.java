@@ -5,6 +5,7 @@ import com.catwizard.domain.RestResponse;
 import com.catwizard.service.EbookConversionService;
 import com.catwizard.service.EmailService;
 import com.catwizard.service.HtmlService;
+import com.catwizard.service.TitleExtractorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by poolebu on 1/7/16.
@@ -45,6 +47,11 @@ public class ConverterController {
         RestResponse restResponse = new RestResponse("Got request "+ convertRequest.toString());
 
         File fileToSend=null;
+
+        // Get the title from the web page if we got none yet
+        if (convertRequest.getTitle().equalsIgnoreCase("ebook_content") || convertRequest.getTitle().isEmpty())
+            convertRequest.setTitle(extractTitleFromUrl(convertRequest));
+
 
         // If is html, convert and send
         if (convertRequest.getFormat().equalsIgnoreCase("HTML")){
@@ -85,6 +92,24 @@ public class ConverterController {
         restResponse.setResponse(response);
 
         return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
+
+    }
+
+    private String extractTitleFromUrl(@RequestBody ConvertRequest convertRequest) {
+
+               String title = convertRequest.getTitle();
+
+            try {
+                title = TitleExtractorService.getPageTitle(convertRequest.getUrl());
+                title = title.trim();
+                title = title.substring(0,10);
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        return title;
 
     }
 
