@@ -7,3 +7,7 @@ platforms/
 plugins/
 src/main/ionic/ebookme/www/css/ionic.app.css
 src/main/ionic/ebookme/www/css/ionic.app.min.css
+
+src/main/ionic/ebookme/.io-config.json
+
+src/main/ionic/ebookme/ebookme-key-store.keystore
