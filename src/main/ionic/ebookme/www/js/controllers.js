@@ -147,7 +147,7 @@ angular.module('app.controllers', ['ngResource'])
 
     $scope.sendToForm = function(item){
 
-      $state.go("tabsController.ebookme",{title:item.title,url:item.url}) ;
+      $state.go("tabsController.ebookme",{title:item.title,url:item.url},{ reload: true }) ;
     };
 
 
