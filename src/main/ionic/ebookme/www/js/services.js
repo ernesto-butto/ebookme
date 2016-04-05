@@ -4,10 +4,10 @@ angular.module('app.services', ['ngStorage'])
     function($resource){
 
       var restConvert=function(){
-        return  $resource('http://ebookme.herokuapp.com',null,
+        return  $resource('http://ebookme.herokuapp.com:8080',null,
           {
-            'sendUrl': {url:'http://ebookme.herokuapp.com/convert',method:'POST'},
-            'getSuggestionsList': {url:'http://ebookme.herokuapp.com/articleList/getList', method:'GET',isArray:true}
+            'sendUrl': {url:'http://ebookme.herokuapp.com:8080/convert',method:'POST'},
+            'getSuggestionsList': {url:'http://ebookme.herokuapp.com:8080/articleList/getList', method:'GET',isArray:true}
 
           });
       };
