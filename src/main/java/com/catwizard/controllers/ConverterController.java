@@ -16,6 +16,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Created by poolebu on 1/7/16.
@@ -64,7 +65,7 @@ public class ConverterController {
             try {
 
 
-               fileToSend=  ebookGlueService.sendGetToCalibreServer(convertRequest.getUrl(), convertRequest.getFormat(), convertRequest.getTitle());
+                fileToSend=  ebookGlueService.sendGetToCalibreServer(convertRequest.getUrl(), convertRequest.getFormat(), convertRequest.getTitle());
 
 
             } catch (Exception e) {
@@ -83,10 +84,14 @@ public class ConverterController {
 
         log.info("Sending email to user :"+ convertRequest.getEmail());
 
+        HashMap<String,Object> items =  new HashMap();
+
+        items.put("convertRequest",convertRequest);
+
+
         emailService.sendMail("You got content " + convertRequest.getEmail(),
-                "Hello, this is the result of your ebookme request",
                 fileToSend,
-                convertRequest.getEmail());
+                convertRequest.getEmail(),items);
 
 
         restResponse.setResponse(response);
@@ -97,17 +102,17 @@ public class ConverterController {
 
     private String extractTitleFromUrl(@RequestBody ConvertRequest convertRequest) {
 
-               String title = convertRequest.getTitle();
+        String title = convertRequest.getTitle();
 
-            try {
-                title = TitleExtractorService.getPageTitle(convertRequest.getUrl());
-                title = title.trim();
-                title = title.substring(0,10);
+        try {
+            title = TitleExtractorService.getPageTitle(convertRequest.getUrl());
+            title = title.trim();
+            title = title.substring(0,10);
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return title;
 

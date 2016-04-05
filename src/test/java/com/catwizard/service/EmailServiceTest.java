@@ -1,6 +1,7 @@
 package com.catwizard.service;
 
 import com.catwizard.MainApplication;
+import com.catwizard.domain.ConvertRequest;
 import org.apache.commons.mail.EmailException;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.File;
+import java.util.HashMap;
 
 /**
  * Created by poolebu on 1/8/16.
@@ -29,12 +31,22 @@ public class EmailServiceTest {
     public void sendEmailTest(){
 
         String toEmail="poolebu@gmail.com";
-        String content="Hello Ernesto, this is a good email, please dont reject me, hope you like it";
         String subject = "Hello Ernesto ";
+
+        ConvertRequest  convertRequest = new ConvertRequest();
+        convertRequest.setEmail(toEmail);
+        convertRequest.setFormat("PDF");
+        convertRequest.setTitle("Test Title");
+        convertRequest.setUrl("test url");
+
+
+        HashMap<String,Object> items =  new HashMap();
+
+        items.put("convertRequest",convertRequest);
 
         File file = new File("/Users/poolebu/Desktop/book2.mobi");
 
-        emailService.sendMail(subject,content,file,toEmail);
+        emailService.sendMail(subject,file,toEmail,items);
 
     }
 
@@ -49,7 +61,18 @@ public class EmailServiceTest {
 
         File file = htmlService.saveHtmlContentToFile(htmlContent,"ebookContent");
 
-        emailService.sendMail("htmlContent test","Trying stuff with this content",file,"poolebu@gmail.com");
+        ConvertRequest  convertRequest = new ConvertRequest();
+        convertRequest.setEmail("poolebu@gmail.com");
+        convertRequest.setFormat("PDF");
+        convertRequest.setTitle("Test Title");
+        convertRequest.setUrl("test url");
+
+
+        HashMap<String,Object> items =  new HashMap();
+
+        items.put("convertRequest",convertRequest);
+
+        emailService.sendMail("htmlContent test",file,"poolebu@gmail.com",items);
 
 
     }

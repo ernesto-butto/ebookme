@@ -23,7 +23,8 @@ angular.module('app.routes', [])
         url: '/convert',
         params:{
           title:null ,
-          url:null
+          url:null,
+          author:null
         },
         views: {
           'tab3': {

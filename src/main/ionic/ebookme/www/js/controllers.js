@@ -7,13 +7,13 @@ angular.module('app.controllers', ['ngResource'])
 
 
 
-    if($stateParams.title && $stateParams.url){
+    if($stateParams.title && $stateParams.url && $stateParams.author){
 
-      $scope.urlToConvert = {title:$stateParams.title,url:$stateParams.url,email:'',format:"PDF"};
+      $scope.urlToConvert = {title:$stateParams.title,url:$stateParams.url,email:'',author:$stateParams.author,format:"PDF"};
 
     }else
 
-      $scope.urlToConvert = {title:"ebook_content",url:"",email:'',format:"PDF"};
+      $scope.urlToConvert = {title:"ebook_content",url:"",email:'',format:"PDF",author:""};
 
 
     var checkIfEmailExist = function(email){
@@ -47,7 +47,7 @@ angular.module('app.controllers', ['ngResource'])
       if (form)
         form.$setPristine();
 
-      $scope.urlToConvert = {title:"",url:"",email:"",format:"HTML"};
+      $scope.urlToConvert = {title:"",url:"",email:"",format:"HTML",author:""};
 
 
     };
@@ -101,7 +101,7 @@ angular.module('app.controllers', ['ngResource'])
 
     $scope.setEmail = function (email){
       $scope.urlToConvert.email=email;
-    //  $scope.validateEmail();
+      $scope.validateEmail();
 
     };
 
@@ -150,7 +150,7 @@ angular.module('app.controllers', ['ngResource'])
 
     $scope.sendToForm = function(item){
 
-      $state.go("tabsController.ebookme",{title:item.title,url:item.url},{ reload: true }) ;
+      $state.go("tabsController.ebookme",{title:item.title,url:item.url,author:item.author},{ reload: true }) ;
     };
 
 
