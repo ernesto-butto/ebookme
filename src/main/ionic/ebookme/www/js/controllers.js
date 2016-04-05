@@ -72,6 +72,7 @@ angular.module('app.controllers', ['ngResource'])
 
         $ionicLoading.hide();
         $scope.successMessage = "Url successfully converted, check your email";
+
         addEmailToLocalStorage($scope.urlToConvert.email);
         resetForm(form);
 
@@ -100,7 +101,7 @@ angular.module('app.controllers', ['ngResource'])
 
     $scope.setEmail = function (email){
       $scope.urlToConvert.email=email;
-      $scope.validateEmail();
+    //  $scope.validateEmail();
 
     };
 
@@ -109,7 +110,9 @@ angular.module('app.controllers', ['ngResource'])
 
     $scope.validateEmail = function(){
 
-      var EMAIL_REGEXP = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+      var EMAIL_REGEXP = /^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
+
+      $scope.urlToConvert.email= $scope.urlToConvert.email.toLowerCase();
 
       $scope.validEmail =   EMAIL_REGEXP.test($scope.urlToConvert.email);
 
