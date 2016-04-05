@@ -1,6 +1,7 @@
 package com.catwizard.service;
 
 import com.catwizard.MainApplication;
+import com.catwizard.domain.ConvertRequest;
 import org.apache.commons.mail.EmailException;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.File;
+import java.util.HashMap;
 
 /**
  * Created by poolebu on 1/7/16.
@@ -53,7 +55,18 @@ public class HtmlServiceTest {
 
         File file = htmlService.saveHtmlContentToFile(htmlContent, "ebookContent");
 
-        emailService.sendMail("htmlContent test","Trying stuff with this content",file,"poolebu@gmail.com");
+        ConvertRequest convertRequest = new ConvertRequest();
+        convertRequest.setEmail("poolebu@gmail.com");
+        convertRequest.setFormat("PDF");
+        convertRequest.setTitle("Test Title");
+        convertRequest.setUrl("test url");
+
+
+        HashMap<String,Object> items =  new HashMap();
+
+        items.put("convertRequest",convertRequest);
+
+        emailService.sendMail("htmlContent test",file,"poolebu@gmail.com",items);
 
     }
 

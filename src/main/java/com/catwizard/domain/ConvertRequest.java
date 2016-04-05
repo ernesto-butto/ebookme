@@ -8,10 +8,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ConvertRequest {
 
-    String title;
-    String url;
-    String format;
-    String email;
+    private String title;
+    private String url;
+    private String format;
+    private String email;
+    private String author;
 
 
     public ConvertRequest() {
@@ -49,6 +50,14 @@ public class ConvertRequest {
         this.title = title;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     @Override
     public String toString() {
         return "ConvertRequest{" +
@@ -56,6 +65,7 @@ public class ConvertRequest {
                 ", url='" + url + '\'' +
                 ", format='" + format + '\'' +
                 ", email='" + email + '\'' +
+                ", author='" + author + '\'' +
                 '}';
     }
 }

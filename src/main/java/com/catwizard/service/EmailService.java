@@ -17,7 +17,9 @@ import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.StringWriter;
@@ -50,7 +52,7 @@ public class EmailService {
         this.password = password;
     }
 
-    public void sendMail(String subject, String content,File fileAttachment,String recepient) {
+    public void sendMail(String subject,File fileAttachment,String recipient, HashMap<String,Object> itemsContent) {
 
 
         // Create the attachment
@@ -66,26 +68,39 @@ public class EmailService {
             email.setSmtpPort(465);
             email.setAuthenticator(new DefaultAuthenticator(username, password));
             email.setSSL(true);
-            email.setFrom(username);
+            email.setFrom(username,"EbookMe");
 
             email.setSubject(subject);
+
+            email.addTo(recipient);
 
             VelocityEngine velocity = new VelocityEngine();
             velocity.init();
 
-            HashMap<String,Object> items =  new HashMap();
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
 
-            items.put("recepient",recepient);
+            String text = VelocityEngineUtils.mergeTemplateIntoString(velocity,"src/main/resources/velocity/emailEbookmeContent.vm","UTF-8",itemsContent);
 
-            String text = VelocityEngineUtils.mergeTemplateIntoString(velocity,"src/main/resources/velocity/emailEbookmeContent.vm","UTF-8",items);
+            messageBodyPart.setContent(text, "text/html");
+
+            MimeMultipart multipart = new MimeMultipart();
+
+            multipart.addBodyPart(messageBodyPart);
+
+            messageBodyPart = new MimeBodyPart();
+
+            javax.activation.DataSource source = new FileDataSource(attachment.getPath());
+
+            messageBodyPart.setDataHandler(new DataHandler(source));
+
+            messageBodyPart.setFileName(attachment.getPath());
+
+            multipart.addBodyPart(messageBodyPart);
+
+            email.setContent(multipart);
 
 
 
-            email.setMsg(text);
-            email.addTo(recepient);
-
-            // Attach
-            email.attach(attachment);
 
             // Send
             email.send();
