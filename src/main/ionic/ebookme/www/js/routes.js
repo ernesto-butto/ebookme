@@ -12,6 +12,7 @@ angular.module('app.routes', [])
       .state('tabsController', {
         url: '/init',
         abstract:true,
+        cache: false,
         templateUrl: 'templates/tabsController.html'
       })
 
